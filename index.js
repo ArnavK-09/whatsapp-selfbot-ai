@@ -20,27 +20,29 @@ const client = new Client();
 // on qr gen 
 client.on('qr', (qr) => {
     qrcode.generate(qr, { small: true });
-    consola.start('Waiting for login....\n', qr);
+    consola.start('Waiting for login....\n');
+    consola.start(`WA Code: ${qr}\n`);
+    consola.info(`QR Code At: https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(qr)}`);
 });
 
 // ready log 
 client.on('ready', () => {
-    consola.success('Client is ready!');
+    consola.success('\nClient is ready!\n');
 });
 
 // Handles Commands 
-client.on("message", async (msg) => {
-    if (msg.body.startsWith("/ask")) {
-        await cmdAsk(msg)
-    }
-})
-
+client.on("message", async (msg) => handler(msg))
 // Handles Self Commands 
-client.on("message_create", async (msg) => {
+client.on("message_create", async (msg) => handler(msg))
+
+/**
+ * ALL Commands Handler
+ */
+async function handler(msg) {
     if (msg.body.startsWith("/ask")) {
         await cmdAsk(msg)
     }
-})
+}
 
 /**
  * Handles /ask command
@@ -57,6 +59,13 @@ async function cmdAsk(msg) {
         consola.error(e.message)
     }
 }
+
+/**
+ * Error Handler
+ */
+process.on('unhandledRejection', error => {
+    consola.error(e.message)
+});
 
 // init client 
 client.initialize();

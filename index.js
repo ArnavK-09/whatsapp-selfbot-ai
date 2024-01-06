@@ -63,8 +63,8 @@ async function cmdAsk(msg) {
 /**
  * Error Handler
  */
-process.on('unhandledRejection', error => {
-    consola.error(e.message)
+process.on('unhandledRejection', e => {
+    consola.error(e)
 });
 
 // init client 

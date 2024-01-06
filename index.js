@@ -68,4 +68,5 @@ process.on('unhandledRejection', error => {
 });
 
 // init client 
-client.initialize();
+//client.initialize();
+module.exports = client;

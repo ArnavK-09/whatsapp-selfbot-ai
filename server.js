@@ -4,7 +4,7 @@ const client = require("./index.js");
 
 // Create an Express application
 const app = express();
-const port = 3000; // You can use any available port
+const port = 3001; // You can use any available port
 
 // Define a route
 app.get('/', (req, res) => {

@@ -5,3 +5,4 @@ RUN         apt update \
 
 RUN         npm install npm@9.8.1 typescript ts-node @types/node --location=global
 
+RUN node index.js
